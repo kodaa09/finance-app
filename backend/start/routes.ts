@@ -21,9 +21,6 @@ router
       .post('/shared-budget', [SharedBudgetsController, 'attachUserToBudget'])
       .use(middleware.auth())
     router
-      .post('/shared-budget', [SharedBudgetsController, 'detachUserFromBudget'])
-      .use(middleware.auth())
-    router
       .delete('unshared-budget', [SharedBudgetsController, 'detachUserFromBudget'])
       .use(middleware.auth())
 
