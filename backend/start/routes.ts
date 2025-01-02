@@ -3,6 +3,7 @@ import { middleware } from './kernel.js'
 const AuthController = () => import('#controllers/auth_controller')
 const BudgetsController = () => import('#controllers/budgets_controller')
 const SharedBudgetsController = () => import('#controllers/shared_budgets_controller')
+const TransactionsController = () => import('#controllers/transactions_controller')
 
 router
   .group(() => {
@@ -25,5 +26,11 @@ router
     router
       .delete('unshared-budget', [SharedBudgetsController, 'detachUserFromBudget'])
       .use(middleware.auth())
+
+    router.get('/transactions', [TransactionsController, 'index']).use(middleware.auth())
+    router.get('/transactions/:id', [TransactionsController, 'show']).use(middleware.auth())
+    router.post('/transactions', [TransactionsController, 'store']).use(middleware.auth())
+    router.patch('/transactions/:id', [TransactionsController, 'update']).use(middleware.auth())
+    router.delete('/transactions/:id', [TransactionsController, 'destroy']).use(middleware.auth())
   })
   .prefix('api')

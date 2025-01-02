@@ -1,7 +1,8 @@
 import { DateTime } from 'luxon'
-import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, manyToMany } from '@adonisjs/lucid/orm'
 import User from './user.js'
-import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
+import Transaction from './transaction.js'
 
 export default class Budget extends BaseModel {
   @column({ isPrimary: true })
@@ -15,6 +16,9 @@ export default class Budget extends BaseModel {
 
   @column()
   declare startOn: Date
+
+  @hasMany(() => Transaction)
+  declare posts: HasMany<typeof Transaction>
 
   @manyToMany(() => User)
   declare users: ManyToMany<typeof User>

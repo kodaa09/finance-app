@@ -1,10 +1,11 @@
 import { DateTime } from 'luxon'
 import hash from '@adonisjs/core/services/hash'
 import { compose } from '@adonisjs/core/helpers'
-import { BaseModel, column, manyToMany } from '@adonisjs/lucid/orm'
+import { BaseModel, column, hasMany, manyToMany } from '@adonisjs/lucid/orm'
 import { withAuthFinder } from '@adonisjs/auth/mixins/lucid'
 import Budget from './budget.js'
-import type { ManyToMany } from '@adonisjs/lucid/types/relations'
+import type { HasMany, ManyToMany } from '@adonisjs/lucid/types/relations'
+import Transaction from './transaction.js'
 
 const AuthFinder = withAuthFinder(() => hash.use('scrypt'), {
   uids: ['email'],
@@ -26,6 +27,9 @@ export default class User extends compose(BaseModel, AuthFinder) {
 
   @column()
   declare currency: string
+
+  @hasMany(() => Transaction)
+  declare posts: HasMany<typeof Transaction>
 
   @manyToMany(() => Budget)
   declare budgets: ManyToMany<typeof Budget>
