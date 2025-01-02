@@ -12,6 +12,9 @@ export default class Budget extends BaseModel {
   declare name: string
 
   @column()
+  declare color: string
+
+  @column()
   declare amount: number
 
   @column()

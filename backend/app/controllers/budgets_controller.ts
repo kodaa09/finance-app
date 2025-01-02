@@ -4,7 +4,7 @@ import type { HttpContext } from '@adonisjs/core/http'
 export default class BudgetsController {
   async store({ request, response, auth }: HttpContext) {
     const user = await auth.authenticate()
-    const data = request.only(['name', 'amount', 'description'])
+    const data = request.only(['name', 'color', 'amount', 'description'])
     const budget = await Budget.create(data)
 
     await budget.related('users').attach([user.id])
@@ -20,7 +20,7 @@ export default class BudgetsController {
       return response.unauthorized({ message: "You don't have permission to delete this budget" })
     }
 
-    const data = request.only(['name', 'amount', 'description'])
+    const data = request.only(['name', 'color', 'amount', 'description'])
     await budget.merge(data).save()
     await budget.related('users').attach([user.id])
     return response.status(200).json({ message: 'Budget updated successfully', budget })
