@@ -1,0 +1,28 @@
+<p-card header="Login">
+  <p class="mb-4">
+    Lorem ipsum dolor sit amet...
+  </p>
+  <form (submit)="onLogin()" [formGroup]="loginForm">
+    <div class="flex flex-col gap-1 mb-5">
+      <label class="text-sm mb-0" for="email">Email</label>
+      <input pInputText id="email" variant="filled" pSize="small" formControlName="email" />
+    </div>
+    <div class="flex flex-col gap-1 mb-5">
+      <label class="text-sm mb-0" for="password">Password</label>
+      <p-password class="w-full" [toggleMask]="true" variant="filled" size="small" [feedback]="false"
+        formControlName="password" />
+    </div>
+    <p class="mb-4">
+      Need to create an account? <button type="button" class="underline" (click)="onChangeForm()">Sign-in</button>
+    </p>
+    <p-button type="submit" class="w-full inline-block" [disabled]="loginForm.invalid">
+      <span pButtonLabel>Login</span>
+      @if (isLoading()) {
+      <i class="pi pi-spin pi-spinner"></i>
+      }
+    </p-button>
+  </form>
+  @if (errorMessage()) {
+  <p class="mt-4 text-red-800 text-center">{{ errorMessage() }}</p>
+  }
+</p-card>

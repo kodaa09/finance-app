@@ -11,12 +11,20 @@ export default class AuthController {
   )
 
   async signup({ request, response }: HttpContext) {
-    const { fullName, email, password } = request.only(['fullName', 'email', 'password'])
+    const { fullName, email, password, salary, currency } = request.only([
+      'fullName',
+      'email',
+      'password',
+      'salary',
+      'currency',
+    ])
 
     const user = await User.create({
       fullName,
       email,
       password,
+      salary,
+      currency,
     })
 
     if (!user) {

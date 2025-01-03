@@ -1,0 +1,41 @@
+<p-card header="Sign-in">
+  <p class="mb-4">
+    Lorem ipsum dolor sit amet...
+  </p>
+  <form (submit)="onSignup()" [formGroup]="signupForm">
+    <div class="flex flex-col gap-1 mb-5">
+      <label class="text-sm mb-0" for="fullName">Fullname</label>
+      <input pInputText id="fullName" variant="filled" pSize="small" formControlName="fullName" />
+    </div>
+    <div class="flex flex-col gap-1 mb-5">
+      <label class="text-sm mb-0" for="email">Email</label>
+      <input pInputText id="email" variant="filled" pSize="small" formControlName="email" />
+    </div>
+    <div class="flex flex-col gap-1 mb-5">
+      <label class="text-sm mb-0" for="password">Password</label>
+      <p-password class="w-full" [toggleMask]="true" variant="filled" size="small" [feedback]="false"
+        formControlName="password" />
+    </div>
+    <div class="flex items-center gap-2">
+      <div class="flex flex-col gap-1 mb-5 w-6/12">
+        <label class="text-sm mb-0" for="currency">Currency</label>
+        <p-select class="w-full" [options]="currencies" variant="filled" size="small" optionLabel="name"
+          placeholder="Select a currency" formControlName="currency" />
+      </div>
+      <div class="flex flex-col gap-1 mb-5 w-6/12">
+        <label class="text-sm mb-0" for="salary">Salary (per month)</label>
+        <p-inputnumber inputId="salary" mode="decimal" [minFractionDigits]="2" variant="filled" size="small"
+          formControlName="salary" mode="currency" [currency]="currency" />
+      </div>
+    </div>
+    <p class="mb-4">
+      Already have account? <button type="button" class="underline" (click)="onChangeForm()">Login</button>
+    </p>
+    <p-button type="submit" class="w-full inline-block" [disabled]="signupForm.invalid">
+      <span pButtonLabel>Sign-in</span>
+      @if (isLoading()) {
+      <i class="pi pi-spin pi-spinner"></i>
+      }
+    </p-button>
+  </form>
+</p-card>

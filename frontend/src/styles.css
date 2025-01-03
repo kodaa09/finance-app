@@ -1,3 +1,16 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+html, body {
+  height: 100%;
+}
+.p-button {
+  width: 100%;
+}
+.p-password {
+  width: 100%;
+}
+.p-inputtext {
+  width: 100%;
+}
