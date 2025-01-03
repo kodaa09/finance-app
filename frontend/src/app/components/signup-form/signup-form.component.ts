@@ -37,16 +37,17 @@ export class SignupFormComponent {
     salary: new FormControl(0, [Validators.required]),
   })
 
-  onSignup() {
+  async onSignup() {
     const formValue = this.signupForm.value
     if (formValue.fullName && formValue.email && formValue.password && formValue.currency && formValue.salary !== null) {
-      this._authService.signup({
+      await this._authService.signup({
         fullName: formValue.fullName,
         email: formValue.email,
         password: formValue.password,
         currency: formValue.currency.code,
         salary: Number(formValue.salary),
       })
+      this.onChangeForm()
     }
   }
 
